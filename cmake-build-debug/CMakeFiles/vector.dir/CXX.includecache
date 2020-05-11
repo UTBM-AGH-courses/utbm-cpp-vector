@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/valentin/Documents/UTBM/LP73/vector/main.cpp
+iostream
+-
+vector.h
+/home/valentin/Documents/UTBM/LP73/vector/vector.h
+
+/home/valentin/Documents/UTBM/LP73/vector/vector.h
+
