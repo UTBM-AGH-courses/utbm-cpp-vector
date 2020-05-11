@@ -16,7 +16,13 @@ public:
     explicit vector(const int &dimension);
     vector(const vector &vector);
     ~vector();
-    vector& operator=(const vector &vec);
+
+    vector& operator=(const vector &vector);
+    vector operator+(const vector &vec);
+    vector& operator++(int k);
+    vector operator*(double k);
+
+    friend vector operator*(double k, const vector &vec);
 
     double getCoordinates(int pos) const;
     void setCoordinates(int pos, double value);

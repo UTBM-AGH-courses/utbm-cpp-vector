@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/valentin/Documents/UTBM/LP73/vector/main.cpp
+/home/valentin/Documents/UTBM/LP73/vector/vector.cpp
 iostream
 -
 vector.h
