@@ -46,7 +46,7 @@ vector vector::operator+(const vector &vec) const {
     }
 }
 
-vector vector::operator*(const double u) {
+vector vector::operator*(const double u) const {
     auto prod_array = new double[this->dimension];
     for (int i = 0; i < dimension; i++) {
         prod_array[i] = this->coordinates[i] * u;
@@ -56,7 +56,7 @@ vector vector::operator*(const double u) {
     return new_vector;
 }
 
-vector& vector::operator++(int) {
+vector &vector::operator++(int) {
     for (int i = 0; i < this->dimension; i++) {
         this->coordinates[i] += 1;
     }
@@ -104,4 +104,27 @@ std::istream &operator>>(std::istream &input, vector &vec) {
         input >> vec.coordinates[i];
     }
     return input;
+}
+
+double vector::operator*(const vector &vec) const {
+    if (this->dimension != vec.dimension) {
+        throw "Pas les mêmes tailles";
+    } else {
+        auto scalar_product = 0;
+        for (int i = 0; i < dimension; i++) {
+            scalar_product += coordinates[i] * vec.coordinates[i];
+        }
+        return scalar_product;
+    }
+}
+
+vector &vector::operator+=(const vector &vec) {
+    if (this->dimension != vec.dimension) {
+        throw "Pas les mêmes tailles";
+    } else {
+        for (int i = 0; i < dimension; i++) {
+            coordinates[i] += vec.coordinates[i];
+        }
+        return *this;
+    }
 }

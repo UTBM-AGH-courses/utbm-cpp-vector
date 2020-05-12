@@ -19,9 +19,11 @@ public:
 
     vector& operator=(const vector &vector);
     vector operator+(const vector &vec) const;
+    vector& operator+=(const vector &vec);
     vector& operator++(int); // pré-incrémentation k++
     vector operator++() const; // post-incrémenation ++k
-    vector operator*(double k);
+    vector operator*(const double k) const;
+    double operator*(const vector&) const;
 
     double& operator[](int);
 

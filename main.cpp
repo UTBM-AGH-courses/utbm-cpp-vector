@@ -10,7 +10,16 @@ int main() {
     v.setCoordinates(0, 4);
     v.setCoordinates(1, 9);
 
-    cout << "w=" << w;
+    cout << "u=" << u;
+    cout << "v=" << v;
+    cout << endl;
+    cout << "u+=v" << u;
+    cout << "u+v=" << u + v;
+    cout << "u*v=" << u * v;
+    cout << endl;
+    cout << "2.0*u=" << 2.0 * u;
+    cout << "u*4.0=" << u * 4.0;
+
 
     return 0;
 }
