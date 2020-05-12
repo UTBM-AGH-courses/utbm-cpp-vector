@@ -6,30 +6,30 @@
 #define VECTOR_VECTOR_H
 #include <iostream>
 
-class vector {
+template <class T> class vector {
 private:
     int dimension;
-    double* coordinates{};
+    T* coordinates{};
 
 public:
-    vector();
-    explicit vector(const int &dimension);
-    vector(const vector &vector);
-    ~vector();
+    vector<T>();
+    explicit vector<T>(const int &dimension);
+    vector<T>(const vector &vec);
+    ~vector<T>();
 
-    vector& operator=(const vector &vector);
-    vector operator+(const vector &vec) const;
-    vector& operator+=(const vector &vec);
-    vector& operator++(int); // pré-incrémentation k++
-    vector operator++() const; // post-incrémenation ++k
-    vector operator*(const double k) const;
-    double operator*(const vector&) const;
+    vector<T>& operator=(const vector<T> &vec);
+    vector<T> operator+(const vector<T> &vec) const;
+    vector<T>& operator+=(const vector<T> &vec);
+    vector<T>& operator++(int); // pré-incrémentation k++
+    vector<T> operator++() const; // post-incrémenation ++k
+    vector<T> operator*(double k) const;
+    double operator*(const vector<T>&) const;
 
     double& operator[](int);
 
-    friend vector operator*(double k, const vector &vec);
-    friend std::ostream &operator<<(std::ostream &output, const vector &vec);
-    friend std::istream &operator>>(std::istream &input, vector &vec);
+    friend vector<T> operator*(double k, const vector<T> &vec);
+    friend std::ostream &operator<<(std::ostream &output, const vector<T> &vec);
+    friend std::istream &operator>>(std::istream &input, vector<T> &vec);
 
     [[nodiscard]] inline double getCoordinates(int pos) const {return this->coordinates[pos];};
     inline void setCoordinates(int pos, double value){this->coordinates[pos] = value;};

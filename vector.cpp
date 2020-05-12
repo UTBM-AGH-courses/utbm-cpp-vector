@@ -4,74 +4,83 @@
 
 #include <iostream>
 #include "vector.h"
+template<class T>
+vector<T>::vector() : dimension(0), coordinates(nullptr) {}
 
-vector::vector() : dimension(0), coordinates(nullptr) {}
-
-vector::vector(const int &dimension) : dimension(dimension) {
-    this->coordinates = new double[dimension];
+template<class T>
+vector<T>::vector(const int &dimension) : dimension(dimension) {
+    coordinates = new double[dimension];
 }
 
-vector::vector(const vector &vector) : dimension(vector.dimension) {
-    this->coordinates = new double[dimension];
+template<class T>
+vector<T>::vector(const vector<T> &vec) : dimension(vec.dimension) {
+    coordinates = new double[dimension];
     for (int i = 0; i < dimension; ++i) {
-        this->coordinates[i] = vector.coordinates[i];
+        coordinates[i] = vec.coordinates[i];
     }
 }
 
-vector::~vector() {
+template<class T>
+vector<T>::~vector() {
     delete[] coordinates;
 }
 
-vector &vector::operator=(const vector &vector) {
+template<class T>
+vector<T> &vector<T>::operator=(const vector<T> &vec) {
     delete[] coordinates;
-    this->dimension = vector.dimension;
-    this->coordinates = new double[dimension];
+    dimension = vec.dimension;
+    coordinates = new double[dimension];
     for (int i = 0; i < dimension; i++) {
-        this->coordinates[i] = vector.coordinates[i];
+        coordinates[i] = vec.coordinates[i];
     }
     return *this;
 }
 
-vector vector::operator+(const vector &vec) const {
+template<class T>
+vector<T> vector<T>::operator+(const vector<T> &vec) const {
     if (this->dimension != vec.dimension) {
         throw "Pas les mêmes tailles";
     } else {
         auto sum_array = new double[this->dimension];
         for (int i = 0; i < dimension; i++) {
-            sum_array[i] = this->coordinates[i] + vec.coordinates[i];
+            sum_array[i] = coordinates[i] + vec.coordinates[i];
         }
-        auto new_vector = vector(this->dimension);
+        auto new_vector = vector(dimension);
         new_vector.coordinates = sum_array;
         return new_vector;
     }
 }
 
-vector vector::operator*(const double u) const {
+template<class T>
+vector<T> vector<T>::operator*(const double u) const {
     auto prod_array = new double[this->dimension];
     for (int i = 0; i < dimension; i++) {
-        prod_array[i] = this->coordinates[i] * u;
+        prod_array[i] = coordinates[i] * u;
     }
-    auto new_vector = vector(this->dimension);
+    auto new_vector = vector(dimension);
     new_vector.coordinates = prod_array;
     return new_vector;
 }
 
-vector &vector::operator++(int) {
+template<class T>
+vector<T> &vector<T>::operator++(int) {
     for (int i = 0; i < this->dimension; i++) {
-        this->coordinates[i] += 1;
+        coordinates[i] += 1;
     }
     return *this;
 }
 
-vector vector::operator++() const {
+template<class T>
+vector<T> vector<T>::operator++() const {
     vector copy(*this);
     for (int i = 0; i < this->dimension; i++) {
-        this->coordinates[i] += 1;
+        coordinates[i] += 1;
     }
     return copy;
 }
 
-vector operator*(double k, const vector &vec) {
+template<class T>
+vector<T> operator*(double k, const vector<T> &vec) {
     auto prod_array = new double[vec.dimension];
     for (int i = 0; i < vec.dimension; i++) {
         prod_array[i] = vec.coordinates[i] * k;
@@ -81,11 +90,13 @@ vector operator*(double k, const vector &vec) {
     return new_vector;
 }
 
-double &vector::operator[](int i) {
-    return this->coordinates[i];
+template<class T>
+double &vector<T>::operator[](int i) {
+    return coordinates[i];
 }
 
-std::ostream &operator<<(std::ostream &output, const vector &vec) {
+template<class T>
+std::ostream &operator<<(std::ostream &output, const vector<T> &vec) {
     output << "[";
     for (int i = 0; i < vec.dimension; i++) {
         output << vec.coordinates[i];
@@ -95,7 +106,8 @@ std::ostream &operator<<(std::ostream &output, const vector &vec) {
     return output;
 }
 
-std::istream &operator>>(std::istream &input, vector &vec) {
+template<class T>
+std::istream &operator>>(std::istream &input, vector<T> &vec) {
     std::cout << "Taille du vecteur : ";
     input >> vec.dimension;
     delete[] vec.coordinates;
@@ -106,7 +118,8 @@ std::istream &operator>>(std::istream &input, vector &vec) {
     return input;
 }
 
-double vector::operator*(const vector &vec) const {
+template<class T>
+double vector<T>::operator*(const vector<T> &vec) const {
     if (this->dimension != vec.dimension) {
         throw "Pas les mêmes tailles";
     } else {
@@ -118,7 +131,8 @@ double vector::operator*(const vector &vec) const {
     }
 }
 
-vector &vector::operator+=(const vector &vec) {
+template<class T>
+vector<T> &vector<T>::operator+=(const vector<T> &vec) {
     if (this->dimension != vec.dimension) {
         throw "Pas les mêmes tailles";
     } else {
