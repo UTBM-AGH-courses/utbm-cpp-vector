@@ -86,7 +86,7 @@ double& vector::operator[](int i) {
 }
 
 std::ostream& operator<<(std::ostream &output, const vector &vec) {
-  std::cout << "vecteur :" << std::endl;
+  //std::cout << "vecteur :" << std::endl;
 
   for (int i = 0; i < vec.dimension; i++)
   {
