@@ -32,15 +32,7 @@ vector &vector::operator=(const vector &vector) {
     return *this;
 }
 
-double vector::getCoordinates(int pos) const {
-    return this->coordinates[pos];
-}
-
-void vector::setCoordinates(int pos, double value) {
-    this->coordinates[pos] = value;
-}
-
-vector vector::operator+(const vector &vec) {
+vector vector::operator+(const vector &vec) const {
     if (this->dimension != vec.dimension) {
         throw "Pas les mêmes tailles";
     } else {
@@ -64,11 +56,19 @@ vector vector::operator*(const double u) {
     return new_vector;
 }
 
-vector& vector::operator++(int k) {
+vector& vector::operator++(int) {
     for (int i = 0; i < this->dimension; i++) {
         this->coordinates[i] += 1;
     }
     return *this;
+}
+
+vector vector::operator++() const {
+    vector copy(*this);
+    for (int i = 0; i < this->dimension; i++) {
+        this->coordinates[i] += 1;
+    }
+    return copy;
 }
 
 vector operator*(double k, const vector &vec) {
@@ -81,18 +81,27 @@ vector operator*(double k, const vector &vec) {
     return new_vector;
 }
 
-double& vector::operator[](int i) {
-  return this->coordinates[i];
+double &vector::operator[](int i) {
+    return this->coordinates[i];
 }
 
-std::ostream& operator<<(std::ostream &output, const vector &vec) {
-  //std::cout << "vecteur :" << std::endl;
+std::ostream &operator<<(std::ostream &output, const vector &vec) {
+    output << "[";
+    for (int i = 0; i < vec.dimension; i++) {
+        output << vec.coordinates[i];
+        if (i != vec.dimension - 1) output << ",";
+    }
+    output << "]" << std::endl;
+    return output;
+}
 
-  for (int i = 0; i < vec.dimension; i++)
-  {
-    output << vec.coordinates[i] << std::endl;;  
-  }
-  return output;
-  
-  
+std::istream &operator>>(std::istream &input, vector &vec) {
+    std::cout << "Taille du vecteur : ";
+    input >> vec.dimension;
+    delete[] vec.coordinates;
+    for (int i = 0; i < vec.dimension; i++) {
+        std::cout << "Coordonées n°" << i << " : ";
+        input >> vec.coordinates[i];
+    }
+    return input;
 }

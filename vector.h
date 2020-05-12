@@ -18,17 +18,19 @@ public:
     ~vector();
 
     vector& operator=(const vector &vector);
-    vector operator+(const vector &vec);
-    vector& operator++(int k);
+    vector operator+(const vector &vec) const;
+    vector& operator++(int); // pré-incrémentation k++
+    vector operator++() const; // post-incrémenation ++k
     vector operator*(double k);
 
-    friend vector operator*(double k, const vector &vec);
-
     double& operator[](int);
-    friend std::ostream &operator<<(std::ostream &output, const vector &vec);
 
-    double getCoordinates(int pos) const;
-    void setCoordinates(int pos, double value);
+    friend vector operator*(double k, const vector &vec);
+    friend std::ostream &operator<<(std::ostream &output, const vector &vec);
+    friend std::istream &operator>>(std::istream &input, vector &vec);
+
+    [[nodiscard]] inline double getCoordinates(int pos) const {return this->coordinates[pos];};
+    inline void setCoordinates(int pos, double value){this->coordinates[pos] = value;};
 };
 
 
