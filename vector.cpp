@@ -80,3 +80,19 @@ vector operator*(double k, const vector &vec) {
     new_vector.coordinates = prod_array;
     return new_vector;
 }
+
+double& vector::operator[](int i) {
+  return this->coordinates[i];
+}
+
+std::ostream& operator<<(std::ostream &output, const vector &vec) {
+  std::cout << "vecteur :" << std::endl;
+
+  for (int i = 0; i < vec.dimension; i++)
+  {
+    output << vec.coordinates[i] << std::endl;;  
+  }
+  return output;
+  
+  
+}

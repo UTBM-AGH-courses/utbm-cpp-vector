@@ -1,19 +1,23 @@
 #include <iostream>
 #include "vector.h"
+using namespace std;
 
 int main() {
     vector u(1), u2(2), v, w, y, z, a;
     u.setCoordinates(0, 10);
-    std::cout << "u[0]=" << u.getCoordinates(0) << std::endl;
+    cout << "u[0]=" << u.getCoordinates(0) << endl;
     v = u;
-    std::cout << "v[0]=" << v.getCoordinates(0) << std::endl;
+    cout << "v[0]=" << v.getCoordinates(0) << endl;
     w = v + u;
-    std::cout << "w[0]=" << w.getCoordinates(0) << std::endl;
+    cout << "w[0]=" << w.getCoordinates(0) << endl;
     y = v*3;
-    std::cout << "y[0]=" << y.getCoordinates(0) << std::endl;
+    cout << "y[0]=" << y.getCoordinates(0) << endl;
     z = 4*v;
-    std::cout << "z[0]=" << z.getCoordinates(0) << std::endl;
+    cout << "z[0]=" << z.getCoordinates(0) << endl;
     a = u++;
-    std::cout << "a[0]=" << a.getCoordinates(0) << std::endl;
+    cout << "a[0]=" << a.getCoordinates(0) << endl;
+
+    cout << u << endl ;
+
     return 0;
 }
